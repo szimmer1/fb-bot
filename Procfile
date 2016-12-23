@@ -1,2 +1,2 @@
-web: target/universal/stage/bin/play-getting-started -Dhttp.port=${PORT}
-console: target/universal/stage/bin/play-getting-started -main scala.tools.nsc.MainGenericRunner -usejavacp
+web: target/universal/stage/bin/fb-bot
+console: target/universal/stage/bin/fb-bot -main scala.tools.nsc.MainGenericRunner -usejavacp

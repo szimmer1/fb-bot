@@ -1,37 +1,25 @@
-# scala/play-getting-started
+# fb-bot
 
-A barebones Scala app (using the Play framework), which can easily be deployed to Heroku.  
-
-This application support the [Getting Started with Scala/Play on Heroku](https://devcenter.heroku.com/articles/getting-started-with-scala) article - check it out.
+A scala server backend to respond to facebook bot requests
 
 ## Running Locally
 
-Make sure you have Play and sbt installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+#### Compile
 
-```sh
-$ git clone https://github.com/heroku/scala-getting-started.git
-$ cd scala-getting-started
-$ sbt compile stage
-$ heroku local
-```
+Dependencies: `sbt` (> 0.11.0)
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+    git clone https://github.com/szimmer1/fb-bot.git && cd fb-bot
+    sbt compile stage
 
-## Deploying to Heroku
+#### Run with Foreman
+Dependencies: `rvm`
 
-```sh
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
+    gem install bundler
+    bundle install
+    foreman start
 
-or
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+#### Run with Heroku
+Dependencies: [Heroku Toolbelt](https://toolbelt.heroku.com/)
 
-## Documentation
-
-For more information about using Play and Scala on Heroku, see these Dev Center articles:
-
-- [Play and Scala on Heroku](https://devcenter.heroku.com/categories/language-support#scala-and-play)
-
+    heroku local
