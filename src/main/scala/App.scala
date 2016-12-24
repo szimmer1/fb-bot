@@ -23,7 +23,7 @@ object App {
       path("verify-fb") {
         get {
           parameters("hub.verify_token", "hub.challenge") { (token, challenge) =>
-            if (! verify_token.isEmpty && verify_token == token) {
+            if (! verify_token.isEmpty && verify_token.get == token) {
               complete(challenge)
             } else {
               complete(403, "Forbidden: Verify page token failed")
