@@ -8,6 +8,8 @@ import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import scala.io.StdIn
 
+import fbbot.Models.{ Message }
+
 object App {
   def main(argv: Array[String]) {
     implicit val system = ActorSystem("msg-reciever")
@@ -20,7 +22,7 @@ object App {
     println(s"Got verify_token $verify_token")
 
     val route: Route =
-      path("verify-fb") {
+      path("webhook") {
         get {
           parameters("hub.verify_token", "hub.challenge") { (token, challenge) =>
             if (! verify_token.isEmpty && verify_token.get == token) {
@@ -29,7 +31,10 @@ object App {
               complete(403, "Forbidden: Verify page token failed")
             }
           }
-        }
+        } ~
+          post {
+            complete("Sure, you got it boss!")
+          }
       }
 
     val interface = "0.0.0.0"
