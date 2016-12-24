@@ -14,17 +14,22 @@ object App {
     implicit val materializer = ActorMaterializer()
     implicit val executionContext = system.dispatcher
 
+    // env vars
+    val port: Int = sys.env.get("PORT").getOrElse("8080").toInt
+    val verify_token: Option[String] = sys.env.get("VERIFY_PAGE_TOKEN")
+
     val route: Route =
-      path("health") {
+      path("verify-fb") {
         get {
-          complete(StatusCodes.OK)
+          parameters("hub.verify_token", "hub.challenge") { (token, challenge) =>
+            if (! verify_token.isEmpty && verify_token == token) {
+              complete(challenge)
+            } else {
+              complete(403, "Forbidden: Verify page token failed")
+            }
+          }
         }
       }
-    
-    val port = sys.env.get("PORT") match {
-      case Some(port_str) => port_str.toInt
-      case None => 8001
-    }
 
     val interface = "0.0.0.0"
     val bindingFuture = Http().bindAndHandle(route, interface=interface, port=port)
