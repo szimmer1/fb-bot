@@ -16,7 +16,7 @@ object App {
 
     // env vars
     val port: Int = sys.env.get("PORT").getOrElse("8080").toInt
-    val verify_token: Option[String] = sys.env.get("VERIFY_PAGE_TOKEN")
+    val verify_token: Option[String] = sys.env.get("PAGE_ACCESS_TOKEN")
     println(s"Got verify_token $verify_token")
 
     val route: Route =
